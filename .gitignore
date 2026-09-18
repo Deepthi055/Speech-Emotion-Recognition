@@ -15,4 +15,5 @@ __pycache__/
 *.ckpt
 
 checkpoints/
-data/runs/
+data
+runs/wavlm_ce

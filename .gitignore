@@ -15,4 +15,4 @@ __pycache__/
 *.ckpt
 
 checkpoints/
-data/
+data/runs/

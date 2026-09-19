@@ -10,9 +10,9 @@ model:
   use_classifier: true
 
 data:
-  train_csv: "data/metadata/train.csv"
-  val_csv: "data/metadata/validation.csv"
-  test_csv: "data/metadata/test.csv"
+  train_csv: "data/metadata/train_step5.csv"
+  val_csv: "data/metadata/validation_step5.csv"
+  test_csv: "data/metadata/test_step5.csv"
   target_sr: 16000
   max_seconds: 6.0
 

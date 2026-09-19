@@ -17,3 +17,4 @@ __pycache__/
 checkpoints/
 data
 runs/wavlm_ce
+runs/

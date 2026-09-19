@@ -1,3 +1,4 @@
+import os
 from math import gcd
 from pathlib import Path
 import numpy as np
@@ -41,6 +42,10 @@ class SERDataset(Dataset):
         return len(self.df)
 
     def _load_audio(self, path: str) -> torch.Tensor:
+        path = path.replace("\\", "/")
+        if not os.path.isabs(path):
+            path = os.path.join("data", path)
+
         waveform, sr = sf.read(path, dtype="float32", always_2d=True)
         waveform = waveform.mean(axis=1)
 

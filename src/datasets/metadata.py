@@ -1,24 +1,25 @@
+import os
 from pathlib import Path
 import pandas as pd
-
 
 EMOTION_LABELS = [
     "angry",
     "disgust",
     "fear",
     "happy",
-    "sad",
     "neutral",
+    "sad",
 ]
 
-METADATA_COLUMNS = [
-    "utterance_id",
-    "corpus",
-    "speaker_id",
+UNIFIED_COLUMNS = [
+    "file_path",
     "emotion",
-    "audio_path",
+    "speaker_id",
+    "corpus",
+    "split",
 ]
-def load_ravdess_metadata(root_dir):
+
+def load_ravdess_metadata(root_dir: str | Path) -> pd.DataFrame:
     """Load and normalize RAVDESS metadata."""
     root = Path(root_dir)
 
@@ -36,7 +37,6 @@ def load_ravdess_metadata(root_dir):
 
     for audio_path in root.rglob("*.wav"):
         filename = audio_path.stem
-
         parts = filename.split("-")
 
         # RAVDESS filenames must contain 7 fields.
@@ -46,7 +46,7 @@ def load_ravdess_metadata(root_dir):
         emotion_code = parts[2]
         actor_id = parts[6]
 
-        # Exclude emotions that are outside our common label space.
+        # Exclude emotions outside common label space (02=calm, 08=surprised)
         if emotion_code not in emotion_map:
             continue
 
@@ -57,39 +57,33 @@ def load_ravdess_metadata(root_dir):
 
         rows.append(
             {
-                "utterance_id": f"ravdess_{filename}",
-                "corpus": "RAVDESS",
-                "speaker_id": f"ravdess_{actor_id}",
+                "file_path": str(audio_path),
                 "emotion": emotion_map[emotion_code],
-                "audio_path": str(audio_path),
+                "speaker_id": f"ravdess_{actor_id}",
+                "corpus": "RAVDESS",
+                "split": "",
             }
         )
 
-    return pd.DataFrame(rows, columns=METADATA_COLUMNS)
+    return pd.DataFrame(rows, columns=UNIFIED_COLUMNS)
 
-
-def extract_iemocap_audio(df, output_dir):
-    """Extract embedded IEMOCAP WAV bytes into audio files."""
+def extract_iemocap_audio(parquet_files: list[str | Path], output_dir: str | Path) -> None:
+    """Extract embedded IEMOCAP WAV bytes into audio files on disk if not already present."""
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    extracted_paths = []
+    for pfile in parquet_files:
+        df = pd.read_parquet(pfile)
+        for _, row in df.iterrows():
+            audio_data = row["audio"]
+            filename = row["file"]
+            output_path = output_dir / filename
+            if not output_path.exists():
+                with open(output_path, "wb") as f:
+                    f.write(audio_data["bytes"])
 
-    for _, row in df.iterrows():
-        audio_data = row["audio"]
-        filename = audio_data["path"]
-        output_path = output_dir / filename
-
-        if not output_path.exists():
-            with open(output_path, "wb") as f:
-                f.write(audio_data["bytes"])
-
-        extracted_paths.append(str(output_path))
-
-    return extracted_paths
-def load_iemocap_metadata(parquet_files, audio_dir):
+def load_iemocap_metadata(parquet_files: list[str | Path], audio_dir: str | Path) -> pd.DataFrame:
     """Load and normalize IEMOCAP metadata."""
-
     emotion_map = {
         "angry": "angry",
         "frustrated": "angry",
@@ -105,33 +99,35 @@ def load_iemocap_metadata(parquet_files, audio_dir):
     df = pd.concat(frames, ignore_index=True)
 
     rows = []
+    seen = set()
 
     for _, row in df.iterrows():
         emotion = emotion_map.get(row["major_emotion"])
-
-        # Drop surprise and other.
         if emotion is None:
             continue
 
-        filename = Path(row["file"]).name
+        filename = row["file"]
+        if filename in seen:
+            continue
+        seen.add(filename)
 
-        # IEMOCAP speaker = session + gender.
-        # Example: Ses01F_impro01_F000.wav -> iemocap_Ses01F
-        session_gender = filename[:6]
+        session_gender = filename[:6]  # e.g. Ses01F
+        audio_path = Path(audio_dir) / filename
 
         rows.append(
             {
-                "utterance_id": f"iemocap_{filename}",
-                "corpus": "IEMOCAP",
-                "speaker_id": f"iemocap_{session_gender}",
+                "file_path": str(audio_path),
                 "emotion": emotion,
-                "audio_path": str(Path(audio_dir) / filename),
+                "speaker_id": f"iemocap_{session_gender}",
+                "corpus": "IEMOCAP",
+                "split": "",
             }
         )
-    return pd.DataFrame(rows, columns=METADATA_COLUMNS)
-def load_cremad_metadata(root_dir):
-    """Load and normalize CREMA-D metadata."""
 
+    return pd.DataFrame(rows, columns=UNIFIED_COLUMNS)
+
+def load_cremad_metadata(root_dir: str | Path) -> pd.DataFrame:
+    """Load and normalize CREMA-D metadata."""
     root = Path(root_dir)
 
     emotion_map = {
@@ -144,12 +140,12 @@ def load_cremad_metadata(root_dir):
     }
 
     rows = []
+    seen = set()
 
     for audio_path in root.rglob("*.wav"):
         filename = audio_path.stem
         parts = filename.split("_")
 
-        # CREMA-D filenames must contain 4 fields.
         if len(parts) != 4:
             continue
 
@@ -159,14 +155,18 @@ def load_cremad_metadata(root_dir):
         if emotion_code not in emotion_map:
             continue
 
+        if filename in seen:
+            continue
+        seen.add(filename)
+
         rows.append(
             {
-                "utterance_id": f"cremad_{filename}",
-                "corpus": "CREMA-D",
-                "speaker_id": f"cremad_{actor_id}",
+                "file_path": str(audio_path),
                 "emotion": emotion_map[emotion_code],
-                "audio_path": str(audio_path),
+                "speaker_id": f"cremad_{actor_id}",
+                "corpus": "CREMA-D",
+                "split": "",
             }
         )
 
-    return pd.DataFrame(rows, columns=METADATA_COLUMNS)
+    return pd.DataFrame(rows, columns=UNIFIED_COLUMNS)

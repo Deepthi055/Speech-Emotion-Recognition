@@ -23,7 +23,32 @@ logger = setup_logger()
 def load_config(config_path: str) -> dict:
     with open(config_path, "r") as f:
         return yaml.safe_load(f)
+    
+def compute_speaker_corpus_weights(
+    labels: torch.Tensor,
+    speaker_ids: torch.Tensor,
+    corpus_ids: torch.Tensor,
+) -> torch.Tensor:
+    same_emotion = labels.unsqueeze(1) == labels.unsqueeze(0)
+    same_speaker = speaker_ids.unsqueeze(1) == speaker_ids.unsqueeze(0)
 
+    weights = torch.zeros(
+        labels.size(0),
+        labels.size(0),
+        device=labels.device,
+        dtype=torch.float32,
+    )
+
+    # Same emotion + different speaker = preferred positive
+    weights[same_emotion & ~same_speaker] = 1.0
+
+    # Same emotion + same speaker = weaker positive
+    weights[same_emotion & same_speaker] = 0.25
+
+    # Do not treat a sample as its own positive
+    weights.fill_diagonal_(0.0)
+
+    return weights
 
 def build_dataloader(dataset, config_sampler, is_train: bool = True):
     sampler_type = config_sampler.get("type", "standard") if is_train else "standard"

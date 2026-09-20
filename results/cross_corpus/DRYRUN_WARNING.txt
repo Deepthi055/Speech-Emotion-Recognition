@@ -1,0 +1,7 @@
+WARNING: cross_corpus_summary.json and all per-setup metrics.json files in this
+directory were produced by dry-run evaluation (max_samples=32 per setup).
+
+DO NOT cite these numbers as cross-corpus generalization results.
+
+Re-run with: python -m scripts.train_cross_corpus --all
+to produce valid full-corpus results (stored in cross_corpus_full_eval.json).

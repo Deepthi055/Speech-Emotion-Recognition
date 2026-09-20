@@ -1,0 +1,6 @@
+model_name,checkpoint_path,war,uar,macro_f1,weighted_f1
+WavLM + CE,runs/wavlm_ce_baseline/best_model.pt,0.5803957946815089,0.5874920644164315,0.5747472942060737,0.5798827149298863
+WavLM + Standard SupCon,runs/wavlm_supcon/best_model.pt,0.5729746444032159,0.5893671460013186,0.5696175948198156,0.574764238766555
+WavLM + Speaker-Aware SupCon,runs/wavlm_speaker_supcon/best_model.pt,0.5729746444032159,0.5893671460013186,0.5696175948198156,0.574764238766555
+WavLM + Corpus-Aware SupCon,runs/wavlm_corpus_supcon/best_model.pt,0.5729746444032159,0.5893671460013186,0.5696175948198156,0.574764238766555
+WavLM + Speaker + Corpus-Aware SupCon (Proposed),runs/wavlm_proposed_supcon/best_model.pt,0.5729746444032159,0.5893671460013186,0.5696175948198156,0.574764238766555

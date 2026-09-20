@@ -1,1682 +1,1691 @@
-[
-  {
-    "setup_key": "crema_ravdess_to_iemocap",
-    "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
-    "variant": "ce",
-    "variant_title": "WavLM + CE Baseline",
-    "best_val_uar": 0.16666666666666666,
-    "test_accuracy": 0.0,
-    "test_uar": 0.0,
-    "test_f1_macro": 0.0,
-    "test_f1_weighted": 0.0,
-    "confusion_matrix": [
-      [
-        0,
-        16,
-        0,
-        1,
-        0,
-        9
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        1,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        3,
-        0,
-        0,
-        0,
-        2
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 26.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 1.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "accuracy": 0.0,
-      "macro avg": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 32.0
-      }
-    }
+{
+  "_metadata": {
+    "WARNING": "DRY-RUN RESULTS \u2014 max_samples=32 per setup. These numbers are NOT valid for citation or comparison.",
+    "generated_by": "scripts/train_cross_corpus.py --dry-run",
+    "note": "Full cross-corpus results will be written to results/cross_corpus/cross_corpus_full_eval.json after re-evaluation.",
+    "n_experiments": 15,
+    "dry_run": true
   },
-  {
-    "setup_key": "crema_ravdess_to_iemocap",
-    "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
-    "variant": "standard_supcon",
-    "variant_title": "Standard SupCon",
-    "best_val_uar": 0.19444444444444445,
-    "test_accuracy": 0.625,
-    "test_uar": 0.12820512820512822,
-    "test_f1_macro": 0.1388888888888889,
-    "test_f1_weighted": 0.6770833333333334,
-    "confusion_matrix": [
-      [
-        20,
-        4,
-        1,
-        1,
-        0,
-        0
+  "results": [
+    {
+      "setup_key": "crema_ravdess_to_iemocap",
+      "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
+      "variant": "ce",
+      "variant_title": "WavLM + CE Baseline",
+      "best_val_uar": 0.16666666666666666,
+      "test_accuracy": 0.0,
+      "test_uar": 0.0,
+      "test_f1_macro": 0.0,
+      "test_f1_weighted": 0.0,
+      "confusion_matrix": [
+        [
+          0,
+          16,
+          0,
+          1,
+          0,
+          9
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
       ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+      "classification_report": {
+        "angry": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 26.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "accuracy": 0.0,
+        "macro avg": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_ravdess_to_iemocap",
+      "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
+      "variant": "standard_supcon",
+      "variant_title": "Standard SupCon",
+      "best_val_uar": 0.19444444444444445,
+      "test_accuracy": 0.625,
+      "test_uar": 0.12820512820512822,
+      "test_f1_macro": 0.1388888888888889,
+      "test_f1_weighted": 0.6770833333333334,
+      "confusion_matrix": [
+        [
+          20,
+          4,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
       ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+      "classification_report": {
+        "angry": {
+          "precision": 0.9090909090909091,
+          "recall": 0.7692307692307693,
+          "f1-score": 0.8333333333333334,
+          "support": 26.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "accuracy": 0.625,
+        "macro avg": {
+          "precision": 0.15151515151515152,
+          "recall": 0.12820512820512822,
+          "f1-score": 0.1388888888888889,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.7386363636363636,
+          "recall": 0.625,
+          "f1-score": 0.6770833333333334,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_ravdess_to_iemocap",
+      "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
+      "variant": "speaker_supcon",
+      "variant_title": "Speaker-Aware SupCon",
+      "best_val_uar": 0.19444444444444445,
+      "test_accuracy": 0.625,
+      "test_uar": 0.12820512820512822,
+      "test_f1_macro": 0.1388888888888889,
+      "test_f1_weighted": 0.6770833333333334,
+      "confusion_matrix": [
+        [
+          20,
+          4,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
       ],
-      [
-        1,
-        0,
-        0,
-        0,
-        0,
-        0
+      "classification_report": {
+        "angry": {
+          "precision": 0.9090909090909091,
+          "recall": 0.7692307692307693,
+          "f1-score": 0.8333333333333334,
+          "support": 26.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "accuracy": 0.625,
+        "macro avg": {
+          "precision": 0.15151515151515152,
+          "recall": 0.12820512820512822,
+          "f1-score": 0.1388888888888889,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.7386363636363636,
+          "recall": 0.625,
+          "f1-score": 0.6770833333333334,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_ravdess_to_iemocap",
+      "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
+      "variant": "corpus_supcon",
+      "variant_title": "Corpus-Aware SupCon",
+      "best_val_uar": 0.19444444444444445,
+      "test_accuracy": 0.625,
+      "test_uar": 0.12820512820512822,
+      "test_f1_macro": 0.1388888888888889,
+      "test_f1_weighted": 0.6770833333333334,
+      "confusion_matrix": [
+        [
+          20,
+          4,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
       ],
-      [
-        1,
-        2,
-        0,
-        1,
-        0,
-        1
+      "classification_report": {
+        "angry": {
+          "precision": 0.9090909090909091,
+          "recall": 0.7692307692307693,
+          "f1-score": 0.8333333333333334,
+          "support": 26.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "accuracy": 0.625,
+        "macro avg": {
+          "precision": 0.15151515151515152,
+          "recall": 0.12820512820512822,
+          "f1-score": 0.1388888888888889,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.7386363636363636,
+          "recall": 0.625,
+          "f1-score": 0.6770833333333334,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_ravdess_to_iemocap",
+      "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
+      "variant": "proposed_supcon",
+      "variant_title": "Speaker + Corpus-Aware SupCon (Proposed)",
+      "best_val_uar": 0.19444444444444445,
+      "test_accuracy": 0.625,
+      "test_uar": 0.12820512820512822,
+      "test_f1_macro": 0.1388888888888889,
+      "test_f1_weighted": 0.6770833333333334,
+      "confusion_matrix": [
+        [
+          20,
+          4,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
       ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.9090909090909091,
-        "recall": 0.7692307692307693,
-        "f1-score": 0.8333333333333334,
-        "support": 26.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 1.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "accuracy": 0.625,
-      "macro avg": {
-        "precision": 0.15151515151515152,
-        "recall": 0.12820512820512822,
-        "f1-score": 0.1388888888888889,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.7386363636363636,
-        "recall": 0.625,
-        "f1-score": 0.6770833333333334,
-        "support": 32.0
+      "classification_report": {
+        "angry": {
+          "precision": 0.9090909090909091,
+          "recall": 0.7692307692307693,
+          "f1-score": 0.8333333333333334,
+          "support": 26.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "accuracy": 0.625,
+        "macro avg": {
+          "precision": 0.15151515151515152,
+          "recall": 0.12820512820512822,
+          "f1-score": 0.1388888888888889,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.7386363636363636,
+          "recall": 0.625,
+          "f1-score": 0.6770833333333334,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_iemocap_to_ravdess",
+      "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
+      "variant": "ce",
+      "variant_title": "WavLM + CE Baseline",
+      "best_val_uar": 0.175,
+      "test_accuracy": 0.0625,
+      "test_uar": 0.05714285714285714,
+      "test_f1_macro": 0.02857142857142857,
+      "test_f1_weighted": 0.03125,
+      "confusion_matrix": [
+        [
+          2,
+          0,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          5,
+          0,
+          0
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.09523809523809523,
+          "recall": 0.2857142857142857,
+          "f1-score": 0.14285714285714285,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "accuracy": 0.0625,
+        "macro avg": {
+          "precision": 0.015873015873015872,
+          "recall": 0.047619047619047616,
+          "f1-score": 0.023809523809523808,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.020833333333333332,
+          "recall": 0.0625,
+          "f1-score": 0.03125,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_iemocap_to_ravdess",
+      "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
+      "variant": "standard_supcon",
+      "variant_title": "Standard SupCon",
+      "best_val_uar": 0.4166666666666667,
+      "test_accuracy": 0.21875,
+      "test_uar": 0.19642857142857142,
+      "test_f1_macro": 0.12186379928315412,
+      "test_f1_weighted": 0.14023297491039427,
+      "confusion_matrix": [
+        [
+          6,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          5,
+          1,
+          0,
+          1
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.25,
+          "recall": 0.8571428571428571,
+          "f1-score": 0.3870967741935484,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "sad": {
+          "precision": 1.0,
+          "recall": 0.125,
+          "f1-score": 0.2222222222222222,
+          "support": 8.0
+        },
+        "accuracy": 0.21875,
+        "macro avg": {
+          "precision": 0.20833333333333334,
+          "recall": 0.1636904761904762,
+          "f1-score": 0.1015531660692951,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.3046875,
+          "recall": 0.21875,
+          "f1-score": 0.14023297491039427,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_iemocap_to_ravdess",
+      "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
+      "variant": "speaker_supcon",
+      "variant_title": "Speaker-Aware SupCon",
+      "best_val_uar": 0.4166666666666667,
+      "test_accuracy": 0.21875,
+      "test_uar": 0.19642857142857142,
+      "test_f1_macro": 0.12186379928315412,
+      "test_f1_weighted": 0.14023297491039427,
+      "confusion_matrix": [
+        [
+          6,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          5,
+          1,
+          0,
+          1
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.25,
+          "recall": 0.8571428571428571,
+          "f1-score": 0.3870967741935484,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "sad": {
+          "precision": 1.0,
+          "recall": 0.125,
+          "f1-score": 0.2222222222222222,
+          "support": 8.0
+        },
+        "accuracy": 0.21875,
+        "macro avg": {
+          "precision": 0.20833333333333334,
+          "recall": 0.1636904761904762,
+          "f1-score": 0.1015531660692951,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.3046875,
+          "recall": 0.21875,
+          "f1-score": 0.14023297491039427,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_iemocap_to_ravdess",
+      "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
+      "variant": "corpus_supcon",
+      "variant_title": "Corpus-Aware SupCon",
+      "best_val_uar": 0.4166666666666667,
+      "test_accuracy": 0.21875,
+      "test_uar": 0.19642857142857142,
+      "test_f1_macro": 0.12186379928315412,
+      "test_f1_weighted": 0.14023297491039427,
+      "confusion_matrix": [
+        [
+          6,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          5,
+          1,
+          0,
+          1
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.25,
+          "recall": 0.8571428571428571,
+          "f1-score": 0.3870967741935484,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "sad": {
+          "precision": 1.0,
+          "recall": 0.125,
+          "f1-score": 0.2222222222222222,
+          "support": 8.0
+        },
+        "accuracy": 0.21875,
+        "macro avg": {
+          "precision": 0.20833333333333334,
+          "recall": 0.1636904761904762,
+          "f1-score": 0.1015531660692951,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.3046875,
+          "recall": 0.21875,
+          "f1-score": 0.14023297491039427,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "crema_iemocap_to_ravdess",
+      "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
+      "variant": "proposed_supcon",
+      "variant_title": "Speaker + Corpus-Aware SupCon (Proposed)",
+      "best_val_uar": 0.4166666666666667,
+      "test_accuracy": 0.21875,
+      "test_uar": 0.19642857142857142,
+      "test_f1_macro": 0.12186379928315412,
+      "test_f1_weighted": 0.14023297491039427,
+      "confusion_matrix": [
+        [
+          6,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          5,
+          1,
+          0,
+          1
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.25,
+          "recall": 0.8571428571428571,
+          "f1-score": 0.3870967741935484,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 6.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 7.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "sad": {
+          "precision": 1.0,
+          "recall": 0.125,
+          "f1-score": 0.2222222222222222,
+          "support": 8.0
+        },
+        "accuracy": 0.21875,
+        "macro avg": {
+          "precision": 0.20833333333333334,
+          "recall": 0.1636904761904762,
+          "f1-score": 0.1015531660692951,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.3046875,
+          "recall": 0.21875,
+          "f1-score": 0.14023297491039427,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "ravdess_iemocap_to_cremad",
+      "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
+      "variant": "ce",
+      "variant_title": "WavLM + CE Baseline",
+      "best_val_uar": 0.175,
+      "test_accuracy": 0.25,
+      "test_uar": 0.1875,
+      "test_f1_macro": 0.09844054580896684,
+      "test_f1_weighted": 0.13614766081871343,
+      "confusion_matrix": [
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          7,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.22580645161290322,
+          "recall": 1.0,
+          "f1-score": 0.3684210526315789,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 1.0,
+          "recall": 0.125,
+          "f1-score": 0.2222222222222222,
+          "support": 8.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "accuracy": 0.25,
+        "macro avg": {
+          "precision": 0.20430107526881722,
+          "recall": 0.1875,
+          "f1-score": 0.09844054580896684,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.29939516129032256,
+          "recall": 0.25,
+          "f1-score": 0.13614766081871343,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "ravdess_iemocap_to_cremad",
+      "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
+      "variant": "standard_supcon",
+      "variant_title": "Standard SupCon",
+      "best_val_uar": 0.4166666666666667,
+      "test_accuracy": 0.21875,
+      "test_uar": 0.16666666666666666,
+      "test_f1_macro": 0.06140350877192982,
+      "test_f1_weighted": 0.0805921052631579,
+      "confusion_matrix": [
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.22580645161290322,
+          "recall": 1.0,
+          "f1-score": 0.3684210526315789,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "accuracy": 0.21875,
+        "macro avg": {
+          "precision": 0.03763440860215054,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.06140350877192982,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.04939516129032258,
+          "recall": 0.21875,
+          "f1-score": 0.0805921052631579,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "ravdess_iemocap_to_cremad",
+      "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
+      "variant": "speaker_supcon",
+      "variant_title": "Speaker-Aware SupCon",
+      "best_val_uar": 0.4166666666666667,
+      "test_accuracy": 0.21875,
+      "test_uar": 0.16666666666666666,
+      "test_f1_macro": 0.06140350877192982,
+      "test_f1_weighted": 0.0805921052631579,
+      "confusion_matrix": [
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.22580645161290322,
+          "recall": 1.0,
+          "f1-score": 0.3684210526315789,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "accuracy": 0.21875,
+        "macro avg": {
+          "precision": 0.03763440860215054,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.06140350877192982,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.04939516129032258,
+          "recall": 0.21875,
+          "f1-score": 0.0805921052631579,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "ravdess_iemocap_to_cremad",
+      "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
+      "variant": "corpus_supcon",
+      "variant_title": "Corpus-Aware SupCon",
+      "best_val_uar": 0.4166666666666667,
+      "test_accuracy": 0.21875,
+      "test_uar": 0.16666666666666666,
+      "test_f1_macro": 0.06140350877192982,
+      "test_f1_weighted": 0.0805921052631579,
+      "confusion_matrix": [
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.22580645161290322,
+          "recall": 1.0,
+          "f1-score": 0.3684210526315789,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "accuracy": 0.21875,
+        "macro avg": {
+          "precision": 0.03763440860215054,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.06140350877192982,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.04939516129032258,
+          "recall": 0.21875,
+          "f1-score": 0.0805921052631579,
+          "support": 32.0
+        }
+      }
+    },
+    {
+      "setup_key": "ravdess_iemocap_to_cremad",
+      "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
+      "variant": "proposed_supcon",
+      "variant_title": "Speaker + Corpus-Aware SupCon (Proposed)",
+      "best_val_uar": 0.4166666666666667,
+      "test_accuracy": 0.21875,
+      "test_uar": 0.16666666666666666,
+      "test_f1_macro": 0.06140350877192982,
+      "test_f1_weighted": 0.0805921052631579,
+      "confusion_matrix": [
+        [
+          7,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "classification_report": {
+        "angry": {
+          "precision": 0.22580645161290322,
+          "recall": 1.0,
+          "f1-score": 0.3684210526315789,
+          "support": 7.0
+        },
+        "disgust": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 8.0
+        },
+        "fear": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "happy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "neutral": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "sad": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 5.0
+        },
+        "accuracy": 0.21875,
+        "macro avg": {
+          "precision": 0.03763440860215054,
+          "recall": 0.16666666666666666,
+          "f1-score": 0.06140350877192982,
+          "support": 32.0
+        },
+        "weighted avg": {
+          "precision": 0.04939516129032258,
+          "recall": 0.21875,
+          "f1-score": 0.0805921052631579,
+          "support": 32.0
+        }
       }
     }
-  },
-  {
-    "setup_key": "crema_ravdess_to_iemocap",
-    "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
-    "variant": "speaker_supcon",
-    "variant_title": "Speaker-Aware SupCon",
-    "best_val_uar": 0.19444444444444445,
-    "test_accuracy": 0.625,
-    "test_uar": 0.12820512820512822,
-    "test_f1_macro": 0.1388888888888889,
-    "test_f1_weighted": 0.6770833333333334,
-    "confusion_matrix": [
-      [
-        20,
-        4,
-        1,
-        1,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        2,
-        0,
-        1,
-        0,
-        1
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.9090909090909091,
-        "recall": 0.7692307692307693,
-        "f1-score": 0.8333333333333334,
-        "support": 26.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 1.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "accuracy": 0.625,
-      "macro avg": {
-        "precision": 0.15151515151515152,
-        "recall": 0.12820512820512822,
-        "f1-score": 0.1388888888888889,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.7386363636363636,
-        "recall": 0.625,
-        "f1-score": 0.6770833333333334,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "crema_ravdess_to_iemocap",
-    "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
-    "variant": "corpus_supcon",
-    "variant_title": "Corpus-Aware SupCon",
-    "best_val_uar": 0.19444444444444445,
-    "test_accuracy": 0.625,
-    "test_uar": 0.12820512820512822,
-    "test_f1_macro": 0.1388888888888889,
-    "test_f1_weighted": 0.6770833333333334,
-    "confusion_matrix": [
-      [
-        20,
-        4,
-        1,
-        1,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        2,
-        0,
-        1,
-        0,
-        1
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.9090909090909091,
-        "recall": 0.7692307692307693,
-        "f1-score": 0.8333333333333334,
-        "support": 26.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 1.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "accuracy": 0.625,
-      "macro avg": {
-        "precision": 0.15151515151515152,
-        "recall": 0.12820512820512822,
-        "f1-score": 0.1388888888888889,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.7386363636363636,
-        "recall": 0.625,
-        "f1-score": 0.6770833333333334,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "crema_ravdess_to_iemocap",
-    "setup_title": "CREMA-D + RAVDESS -> IEMOCAP",
-    "variant": "proposed_supcon",
-    "variant_title": "Speaker + Corpus-Aware SupCon (Proposed)",
-    "best_val_uar": 0.19444444444444445,
-    "test_accuracy": 0.625,
-    "test_uar": 0.12820512820512822,
-    "test_f1_macro": 0.1388888888888889,
-    "test_f1_weighted": 0.6770833333333334,
-    "confusion_matrix": [
-      [
-        20,
-        4,
-        1,
-        1,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        2,
-        0,
-        1,
-        0,
-        1
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.9090909090909091,
-        "recall": 0.7692307692307693,
-        "f1-score": 0.8333333333333334,
-        "support": 26.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 1.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "accuracy": 0.625,
-      "macro avg": {
-        "precision": 0.15151515151515152,
-        "recall": 0.12820512820512822,
-        "f1-score": 0.1388888888888889,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.7386363636363636,
-        "recall": 0.625,
-        "f1-score": 0.6770833333333334,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "crema_iemocap_to_ravdess",
-    "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
-    "variant": "ce",
-    "variant_title": "WavLM + CE Baseline",
-    "best_val_uar": 0.175,
-    "test_accuracy": 0.0625,
-    "test_uar": 0.05714285714285714,
-    "test_f1_macro": 0.02857142857142857,
-    "test_f1_weighted": 0.03125,
-    "confusion_matrix": [
-      [
-        2,
-        0,
-        0,
-        5,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        6,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        3,
-        0,
-        0,
-        1,
-        0,
-        0
-      ],
-      [
-        3,
-        0,
-        0,
-        5,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.09523809523809523,
-        "recall": 0.2857142857142857,
-        "f1-score": 0.14285714285714285,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 6.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 7.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 8.0
-      },
-      "accuracy": 0.0625,
-      "macro avg": {
-        "precision": 0.015873015873015872,
-        "recall": 0.047619047619047616,
-        "f1-score": 0.023809523809523808,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.020833333333333332,
-        "recall": 0.0625,
-        "f1-score": 0.03125,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "crema_iemocap_to_ravdess",
-    "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
-    "variant": "standard_supcon",
-    "variant_title": "Standard SupCon",
-    "best_val_uar": 0.4166666666666667,
-    "test_accuracy": 0.21875,
-    "test_uar": 0.19642857142857142,
-    "test_f1_macro": 0.12186379928315412,
-    "test_f1_weighted": 0.14023297491039427,
-    "confusion_matrix": [
-      [
-        6,
-        0,
-        1,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        6,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        0,
-        5,
-        1,
-        0,
-        1
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.25,
-        "recall": 0.8571428571428571,
-        "f1-score": 0.3870967741935484,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 6.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 7.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "sad": {
-        "precision": 1.0,
-        "recall": 0.125,
-        "f1-score": 0.2222222222222222,
-        "support": 8.0
-      },
-      "accuracy": 0.21875,
-      "macro avg": {
-        "precision": 0.20833333333333334,
-        "recall": 0.1636904761904762,
-        "f1-score": 0.1015531660692951,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.3046875,
-        "recall": 0.21875,
-        "f1-score": 0.14023297491039427,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "crema_iemocap_to_ravdess",
-    "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
-    "variant": "speaker_supcon",
-    "variant_title": "Speaker-Aware SupCon",
-    "best_val_uar": 0.4166666666666667,
-    "test_accuracy": 0.21875,
-    "test_uar": 0.19642857142857142,
-    "test_f1_macro": 0.12186379928315412,
-    "test_f1_weighted": 0.14023297491039427,
-    "confusion_matrix": [
-      [
-        6,
-        0,
-        1,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        6,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        0,
-        5,
-        1,
-        0,
-        1
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.25,
-        "recall": 0.8571428571428571,
-        "f1-score": 0.3870967741935484,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 6.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 7.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "sad": {
-        "precision": 1.0,
-        "recall": 0.125,
-        "f1-score": 0.2222222222222222,
-        "support": 8.0
-      },
-      "accuracy": 0.21875,
-      "macro avg": {
-        "precision": 0.20833333333333334,
-        "recall": 0.1636904761904762,
-        "f1-score": 0.1015531660692951,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.3046875,
-        "recall": 0.21875,
-        "f1-score": 0.14023297491039427,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "crema_iemocap_to_ravdess",
-    "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
-    "variant": "corpus_supcon",
-    "variant_title": "Corpus-Aware SupCon",
-    "best_val_uar": 0.4166666666666667,
-    "test_accuracy": 0.21875,
-    "test_uar": 0.19642857142857142,
-    "test_f1_macro": 0.12186379928315412,
-    "test_f1_weighted": 0.14023297491039427,
-    "confusion_matrix": [
-      [
-        6,
-        0,
-        1,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        6,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        0,
-        5,
-        1,
-        0,
-        1
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.25,
-        "recall": 0.8571428571428571,
-        "f1-score": 0.3870967741935484,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 6.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 7.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "sad": {
-        "precision": 1.0,
-        "recall": 0.125,
-        "f1-score": 0.2222222222222222,
-        "support": 8.0
-      },
-      "accuracy": 0.21875,
-      "macro avg": {
-        "precision": 0.20833333333333334,
-        "recall": 0.1636904761904762,
-        "f1-score": 0.1015531660692951,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.3046875,
-        "recall": 0.21875,
-        "f1-score": 0.14023297491039427,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "crema_iemocap_to_ravdess",
-    "setup_title": "CREMA-D + IEMOCAP -> RAVDESS",
-    "variant": "proposed_supcon",
-    "variant_title": "Speaker + Corpus-Aware SupCon (Proposed)",
-    "best_val_uar": 0.4166666666666667,
-    "test_accuracy": 0.21875,
-    "test_uar": 0.19642857142857142,
-    "test_f1_macro": 0.12186379928315412,
-    "test_f1_weighted": 0.14023297491039427,
-    "confusion_matrix": [
-      [
-        6,
-        0,
-        1,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        6,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        1,
-        0,
-        5,
-        1,
-        0,
-        1
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.25,
-        "recall": 0.8571428571428571,
-        "f1-score": 0.3870967741935484,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 0.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 6.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 7.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "sad": {
-        "precision": 1.0,
-        "recall": 0.125,
-        "f1-score": 0.2222222222222222,
-        "support": 8.0
-      },
-      "accuracy": 0.21875,
-      "macro avg": {
-        "precision": 0.20833333333333334,
-        "recall": 0.1636904761904762,
-        "f1-score": 0.1015531660692951,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.3046875,
-        "recall": 0.21875,
-        "f1-score": 0.14023297491039427,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "ravdess_iemocap_to_cremad",
-    "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
-    "variant": "ce",
-    "variant_title": "WavLM + CE Baseline",
-    "best_val_uar": 0.175,
-    "test_accuracy": 0.25,
-    "test_uar": 0.1875,
-    "test_f1_macro": 0.09844054580896684,
-    "test_f1_weighted": 0.13614766081871343,
-    "confusion_matrix": [
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        7,
-        1,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        5,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        3,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        5,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.22580645161290322,
-        "recall": 1.0,
-        "f1-score": 0.3684210526315789,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 1.0,
-        "recall": 0.125,
-        "f1-score": 0.2222222222222222,
-        "support": 8.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 3.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "accuracy": 0.25,
-      "macro avg": {
-        "precision": 0.20430107526881722,
-        "recall": 0.1875,
-        "f1-score": 0.09844054580896684,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.29939516129032256,
-        "recall": 0.25,
-        "f1-score": 0.13614766081871343,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "ravdess_iemocap_to_cremad",
-    "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
-    "variant": "standard_supcon",
-    "variant_title": "Standard SupCon",
-    "best_val_uar": 0.4166666666666667,
-    "test_accuracy": 0.21875,
-    "test_uar": 0.16666666666666666,
-    "test_f1_macro": 0.06140350877192982,
-    "test_f1_weighted": 0.0805921052631579,
-    "confusion_matrix": [
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        8,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        5,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        3,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        1,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.22580645161290322,
-        "recall": 1.0,
-        "f1-score": 0.3684210526315789,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 8.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 3.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "accuracy": 0.21875,
-      "macro avg": {
-        "precision": 0.03763440860215054,
-        "recall": 0.16666666666666666,
-        "f1-score": 0.06140350877192982,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.04939516129032258,
-        "recall": 0.21875,
-        "f1-score": 0.0805921052631579,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "ravdess_iemocap_to_cremad",
-    "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
-    "variant": "speaker_supcon",
-    "variant_title": "Speaker-Aware SupCon",
-    "best_val_uar": 0.4166666666666667,
-    "test_accuracy": 0.21875,
-    "test_uar": 0.16666666666666666,
-    "test_f1_macro": 0.06140350877192982,
-    "test_f1_weighted": 0.0805921052631579,
-    "confusion_matrix": [
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        8,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        5,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        3,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        1,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.22580645161290322,
-        "recall": 1.0,
-        "f1-score": 0.3684210526315789,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 8.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 3.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "accuracy": 0.21875,
-      "macro avg": {
-        "precision": 0.03763440860215054,
-        "recall": 0.16666666666666666,
-        "f1-score": 0.06140350877192982,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.04939516129032258,
-        "recall": 0.21875,
-        "f1-score": 0.0805921052631579,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "ravdess_iemocap_to_cremad",
-    "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
-    "variant": "corpus_supcon",
-    "variant_title": "Corpus-Aware SupCon",
-    "best_val_uar": 0.4166666666666667,
-    "test_accuracy": 0.21875,
-    "test_uar": 0.16666666666666666,
-    "test_f1_macro": 0.06140350877192982,
-    "test_f1_weighted": 0.0805921052631579,
-    "confusion_matrix": [
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        8,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        5,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        3,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        1,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.22580645161290322,
-        "recall": 1.0,
-        "f1-score": 0.3684210526315789,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 8.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 3.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "accuracy": 0.21875,
-      "macro avg": {
-        "precision": 0.03763440860215054,
-        "recall": 0.16666666666666666,
-        "f1-score": 0.06140350877192982,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.04939516129032258,
-        "recall": 0.21875,
-        "f1-score": 0.0805921052631579,
-        "support": 32.0
-      }
-    }
-  },
-  {
-    "setup_key": "ravdess_iemocap_to_cremad",
-    "setup_title": "RAVDESS + IEMOCAP -> CREMA-D",
-    "variant": "proposed_supcon",
-    "variant_title": "Speaker + Corpus-Aware SupCon (Proposed)",
-    "best_val_uar": 0.4166666666666667,
-    "test_accuracy": 0.21875,
-    "test_uar": 0.16666666666666666,
-    "test_f1_macro": 0.06140350877192982,
-    "test_f1_weighted": 0.0805921052631579,
-    "confusion_matrix": [
-      [
-        7,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        8,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        5,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        3,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        4,
-        1,
-        0,
-        0,
-        0,
-        0
-      ]
-    ],
-    "classification_report": {
-      "angry": {
-        "precision": 0.22580645161290322,
-        "recall": 1.0,
-        "f1-score": 0.3684210526315789,
-        "support": 7.0
-      },
-      "disgust": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 8.0
-      },
-      "fear": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "happy": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 4.0
-      },
-      "neutral": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 3.0
-      },
-      "sad": {
-        "precision": 0.0,
-        "recall": 0.0,
-        "f1-score": 0.0,
-        "support": 5.0
-      },
-      "accuracy": 0.21875,
-      "macro avg": {
-        "precision": 0.03763440860215054,
-        "recall": 0.16666666666666666,
-        "f1-score": 0.06140350877192982,
-        "support": 32.0
-      },
-      "weighted avg": {
-        "precision": 0.04939516129032258,
-        "recall": 0.21875,
-        "f1-score": 0.0805921052631579,
-        "support": 32.0
-      }
-    }
-  }
-]
+  ]
+}

@@ -29,6 +29,7 @@ from src.losses.contrastive_weights import (
     compute_corpus_aware_weights,
     compute_speaker_corpus_aware_weights,
 )
+from src.samplers.stratified import StratifiedEmotionBatchSampler
 from src.utils.logging import setup_logger
 from src.utils.seed import set_seed
 
@@ -180,19 +181,50 @@ def run_experiment(config_path: str | Path, dry_run: bool = False, seed: int = 4
     test_ds = EmbeddingDataset(data_cfg["test_npz"], max_samples=max_samples)
 
     batch_size = train_cfg.get("batch_size", 64)
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
+    num_classes = config["model"].get("num_classes", 6)
+    sampler_type = train_cfg.get("sampler_type", "standard")  # "standard" | "stratified"
+
+    # --- Training DataLoader ---
+    if sampler_type == "stratified" and not dry_run:
+        train_sampler = StratifiedEmotionBatchSampler(
+            labels=train_ds.labels,
+            batch_size=batch_size,
+            num_classes=num_classes,
+            shuffle=True,
+            seed=seed,
+        )
+        train_loader = DataLoader(train_ds, batch_sampler=train_sampler)
+        logger.info(f"Using StratifiedEmotionBatchSampler (batch_size={batch_size}, num_classes={num_classes})")
+    else:
+        train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
+        logger.info(f"Using standard random sampler (batch_size={batch_size})")
+
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False)
 
     model = WavLMEmbeddingSupConModel(
         in_dim=config["model"].get("in_dim", 768),
         proj_dim=config["model"].get("proj_dim", 128),
-        num_classes=config["model"].get("num_classes", 6),
+        num_classes=num_classes,
         use_projection=(variant != "ce"),
         use_classifier=True,
     ).to(device)
 
-    ce_criterion = nn.CrossEntropyLoss()
+    # --- Class-weighted CE loss (optional) ---
+    # Inverse-frequency weights computed from training labels at runtime.
+    # This is NOT hardcoded — it adapts to any corpus subset.
+    use_class_weights = train_cfg.get("use_class_weights", False)
+    if use_class_weights and not dry_run:
+        label_counts = np.bincount(train_ds.labels, minlength=num_classes).astype(np.float64)
+        class_weights = 1.0 / (label_counts + 1e-6)
+        class_weights = class_weights / class_weights.sum() * num_classes  # normalise to sum = num_classes
+        class_weights_tensor = torch.tensor(class_weights, dtype=torch.float32, device=device)
+        ce_criterion = nn.CrossEntropyLoss(weight=class_weights_tensor)
+        logger.info(f"Class-weighted CE enabled. Weights: { {EMOTION_LABELS[i]: f'{class_weights[i]:.4f}' for i in range(num_classes)} }")
+    else:
+        ce_criterion = nn.CrossEntropyLoss()
+        logger.info("Standard unweighted CE loss.")
+
     supcon_criterion = SupConLoss(temperature=loss_cfg.get("temperature", 0.07))
 
     optimizer = torch.optim.AdamW(
@@ -290,7 +322,9 @@ def summarize_all_results():
         ("Standard SupCon", "runs/wavlm_supcon"),
         ("Speaker-Aware SupCon", "runs/wavlm_speaker_supcon"),
         ("Corpus-Aware SupCon (Step 9)", "runs/wavlm_corpus_supcon"),
-        ("Speaker + Corpus-Aware SupCon (Step 10 Proposed)", "runs/wavlm_proposed_supcon"),
+        ("Speaker + Corpus-Aware SupCon (Proposed v1)", "runs/wavlm_proposed_supcon"),
+        ("Proposed + Class-Weighted CE (v2)", "runs/wavlm_proposed_supcon_v2"),
+        ("Proposed + CE Weights + Stratified Sampler (v3)", "runs/wavlm_proposed_supcon_v3"),
     ]
 
     summary = []

@@ -43,7 +43,7 @@ class SERDataset(Dataset):
 
     def _load_audio(self, path: str) -> torch.Tensor:
         path = path.replace("\\", "/")
-        if not os.path.isabs(path):
+        if not os.path.isabs(path) and not path.startswith("data/"):
             path = os.path.join("data", path)
 
         waveform, sr = sf.read(path, dtype="float32", always_2d=True)
@@ -108,3 +108,4 @@ def collate_fn(batch):
         "speaker_strs": [item["speaker_str"] for item in batch],
         "corpus_strs": [item["corpus_str"] for item in batch],
     }
+

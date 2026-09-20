@@ -28,3 +28,35 @@
 [2026-09-21 02:35:26] [INFO] 
 --- Setup: RAVDESS + IEMOCAP -> CREMA-D ---
 [2026-09-21 02:35:26] [INFO] Running model: WavLM + CE Baseline (ce)...
+[2026-09-21 02:35:32] [INFO]  -> Test Acc: 0.2286 | UAR: 0.2257 | Macro-F1: 0.1407
+[2026-09-21 02:35:32] [INFO] Running model: Standard SupCon (standard_supcon)...
+[2026-09-21 02:35:48] [INFO]  -> Test Acc: 0.2327 | UAR: 0.2310 | Macro-F1: 0.1484
+[2026-09-21 02:35:48] [INFO] Running model: Speaker-Aware SupCon (speaker_supcon)...
+[2026-09-21 02:36:04] [INFO]  -> Test Acc: 0.2327 | UAR: 0.2310 | Macro-F1: 0.1484
+[2026-09-21 02:36:04] [INFO] Running model: Corpus-Aware SupCon (corpus_supcon)...
+[2026-09-21 02:36:19] [INFO]  -> Test Acc: 0.2327 | UAR: 0.2310 | Macro-F1: 0.1484
+[2026-09-21 02:36:19] [INFO] Running model: Speaker + Corpus-Aware SupCon (Proposed) (proposed_supcon)...
+[2026-09-21 02:36:34] [INFO]  -> Test Acc: 0.2327 | UAR: 0.2310 | Macro-F1: 0.1484
+[2026-09-21 02:36:34] [INFO] 
+===============================================================================================
+[2026-09-21 02:36:34] [INFO] CROSS-CORPUS EVALUATION RESULTS SUMMARY
+[2026-09-21 02:36:34] [INFO] ===============================================================================================
+[2026-09-21 02:36:34] [INFO] Setup                            | Model                                  | Acc (WAR) | UAR       | Macro-F1 
+[2026-09-21 02:36:34] [INFO] -----------------------------------------------------------------------------------------------
+[2026-09-21 02:36:34] [INFO] CREMA-D + RAVDESS -> IEMOCAP     | WavLM + CE Baseline                    | 0.2586    | 0.4271    | 0.2058   
+[2026-09-21 02:36:34] [INFO] CREMA-D + RAVDESS -> IEMOCAP     | Standard SupCon                        | 0.2546    | 0.4263    | 0.2051   
+[2026-09-21 02:36:34] [INFO] CREMA-D + RAVDESS -> IEMOCAP     | Speaker-Aware SupCon                   | 0.2546    | 0.4263    | 0.2051   
+[2026-09-21 02:36:34] [INFO] CREMA-D + RAVDESS -> IEMOCAP     | Corpus-Aware SupCon                    | 0.2546    | 0.4263    | 0.2051   
+[2026-09-21 02:36:34] [INFO] CREMA-D + RAVDESS -> IEMOCAP     | Speaker + Corpus-Aware SupCon (Proposed) | 0.2546    | 0.4263    | 0.2051   
+[2026-09-21 02:36:34] [INFO] CREMA-D + IEMOCAP -> RAVDESS     | WavLM + CE Baseline                    | 0.2197    | 0.2014    | 0.1135   
+[2026-09-21 02:36:34] [INFO] CREMA-D + IEMOCAP -> RAVDESS     | Standard SupCon                        | 0.2197    | 0.2014    | 0.1156   
+[2026-09-21 02:36:34] [INFO] CREMA-D + IEMOCAP -> RAVDESS     | Speaker-Aware SupCon                   | 0.2197    | 0.2014    | 0.1156   
+[2026-09-21 02:36:34] [INFO] CREMA-D + IEMOCAP -> RAVDESS     | Corpus-Aware SupCon                    | 0.2197    | 0.2014    | 0.1156   
+[2026-09-21 02:36:34] [INFO] CREMA-D + IEMOCAP -> RAVDESS     | Speaker + Corpus-Aware SupCon (Proposed) | 0.2197    | 0.2014    | 0.1156   
+[2026-09-21 02:36:34] [INFO] RAVDESS + IEMOCAP -> CREMA-D     | WavLM + CE Baseline                    | 0.2286    | 0.2257    | 0.1407   
+[2026-09-21 02:36:34] [INFO] RAVDESS + IEMOCAP -> CREMA-D     | Standard SupCon                        | 0.2327    | 0.2310    | 0.1484   
+[2026-09-21 02:36:34] [INFO] RAVDESS + IEMOCAP -> CREMA-D     | Speaker-Aware SupCon                   | 0.2327    | 0.2310    | 0.1484   
+[2026-09-21 02:36:34] [INFO] RAVDESS + IEMOCAP -> CREMA-D     | Corpus-Aware SupCon                    | 0.2327    | 0.2310    | 0.1484   
+[2026-09-21 02:36:34] [INFO] RAVDESS + IEMOCAP -> CREMA-D     | Speaker + Corpus-Aware SupCon (Proposed) | 0.2327    | 0.2310    | 0.1484   
+[2026-09-21 02:36:34] [INFO] ===============================================================================================
+

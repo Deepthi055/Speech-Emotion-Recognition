@@ -1,4 +1,4 @@
-
+<!-- 
 # Speech Emotion Recognition
 
 ## Task 7: Standard Supervised Contrastive Learning
@@ -183,6 +183,39 @@ The neutral class contains fewer samples than the other emotion classes. This di
 
 ---
 
+## Task 12: Ablation Study
+
+Five full CPU experiments were run with seed 42 using the cached WavLM embeddings. The available metadata contains RAVDESS only, so corpus-aware effects cannot be isolated in this run.
+
+| Method | Best validation UAR | Test Accuracy | Test UAR | Test Macro-F1 | Test Weighted-F1 |
+|---|---:|---:|---:|---:|---:|
+| WavLM + CE Baseline | 0.5583 | 0.4727 | 0.4750 | 0.4598 | 0.4572 |
+| Standard SupCon | 0.5667 | 0.4955 | 0.4917 | 0.4823 | 0.4853 |
+| Speaker-Aware SupCon | 0.5667 | 0.4955 | 0.4917 | 0.4823 | 0.4853 |
+| Corpus-Aware SupCon | 0.5667 | 0.4955 | 0.4917 | 0.4823 | 0.4853 |
+| Speaker + Corpus-Aware SupCon | 0.5667 | 0.4955 | 0.4917 | 0.4823 | 0.4853 |
+
+### Component Differences
+
+Differences are calculated as the second method minus the first method:
+
+| Comparison | Accuracy | UAR | Macro-F1 | Weighted-F1 |
+|---|---:|---:|---:|---:|
+| Standard SupCon vs CE baseline | +0.0227 | +0.0167 | +0.0225 | +0.0280 |
+| Speaker-Aware SupCon vs Standard SupCon | +0.0000 | +0.0000 | +0.0000 | +0.0000 |
+| Corpus-Aware SupCon vs Standard SupCon | +0.0000 | +0.0000 | +0.0000 | +0.0000 |
+| Speaker + Corpus-Aware SupCon vs Speaker-Aware SupCon | +0.0000 | +0.0000 | +0.0000 | +0.0000 |
+
+The SupCon family improved over the CE baseline in this run. The speaker-aware, corpus-aware, and proposed variants tied standard SupCon. Because the dataset contains only one corpus, the corpus-aware mask is a uniform rescaling of the standard positive mask after normalization; therefore, this run cannot establish a corpus component contribution. The full per-run metrics and confusion matrices are stored in `results/task12/ablation_results.json`.
+
+The report can be regenerated with:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\run_ablation.py --local-runs
+```
+
+---
+
 ## Limitations and Future Work
 
 - Analyze the reasons for confusion between emotion classes.
@@ -207,4 +240,4 @@ The initial training run achieved a UAR of 16.67%. A subsequent training run ach
 
 The latest results are validation results and require further investigation through class-wise analysis, test-set evaluation, and comparison with the baseline model.
 
-The implementation and experimental results will be further refined as part of the ongoing Speech Emotion Recognition project.
+The implementation and experimental results will be further refined as part of the ongoing Speech Emotion Recognition project. -->

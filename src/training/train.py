@@ -140,6 +140,7 @@ def main():
         use_projection=model_cfg.get("use_projection", True),
         use_classifier=model_cfg.get("use_classifier", True),
         pooling=model_cfg.get("pooling", "attention"),
+        freeze_backbone=model_cfg.get("freeze_backbone", False),
     ).to(device)
 
     ce_criterion = nn.CrossEntropyLoss()

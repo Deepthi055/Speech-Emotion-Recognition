@@ -1,0 +1,16 @@
+setup_key,setup_title,variant,variant_title,test_accuracy,test_uar,test_f1_macro,test_f1_weighted
+crema_ravdess_to_iemocap,CREMA-D + RAVDESS -> IEMOCAP,ce,WavLM + CE Baseline,0.0,0.0,0.0,0.0
+crema_ravdess_to_iemocap,CREMA-D + RAVDESS -> IEMOCAP,standard_supcon,Standard SupCon,0.625,0.12820512820512822,0.1388888888888889,0.6770833333333334
+crema_ravdess_to_iemocap,CREMA-D + RAVDESS -> IEMOCAP,speaker_supcon,Speaker-Aware SupCon,0.625,0.12820512820512822,0.1388888888888889,0.6770833333333334
+crema_ravdess_to_iemocap,CREMA-D + RAVDESS -> IEMOCAP,corpus_supcon,Corpus-Aware SupCon,0.625,0.12820512820512822,0.1388888888888889,0.6770833333333334
+crema_ravdess_to_iemocap,CREMA-D + RAVDESS -> IEMOCAP,proposed_supcon,Speaker + Corpus-Aware SupCon (Proposed),0.625,0.12820512820512822,0.1388888888888889,0.6770833333333334
+crema_iemocap_to_ravdess,CREMA-D + IEMOCAP -> RAVDESS,ce,WavLM + CE Baseline,0.0625,0.05714285714285714,0.02857142857142857,0.03125
+crema_iemocap_to_ravdess,CREMA-D + IEMOCAP -> RAVDESS,standard_supcon,Standard SupCon,0.21875,0.19642857142857142,0.12186379928315412,0.14023297491039427
+crema_iemocap_to_ravdess,CREMA-D + IEMOCAP -> RAVDESS,speaker_supcon,Speaker-Aware SupCon,0.21875,0.19642857142857142,0.12186379928315412,0.14023297491039427
+crema_iemocap_to_ravdess,CREMA-D + IEMOCAP -> RAVDESS,corpus_supcon,Corpus-Aware SupCon,0.21875,0.19642857142857142,0.12186379928315412,0.14023297491039427
+crema_iemocap_to_ravdess,CREMA-D + IEMOCAP -> RAVDESS,proposed_supcon,Speaker + Corpus-Aware SupCon (Proposed),0.21875,0.19642857142857142,0.12186379928315412,0.14023297491039427
+ravdess_iemocap_to_cremad,RAVDESS + IEMOCAP -> CREMA-D,ce,WavLM + CE Baseline,0.25,0.1875,0.09844054580896684,0.13614766081871343
+ravdess_iemocap_to_cremad,RAVDESS + IEMOCAP -> CREMA-D,standard_supcon,Standard SupCon,0.21875,0.16666666666666666,0.06140350877192982,0.0805921052631579
+ravdess_iemocap_to_cremad,RAVDESS + IEMOCAP -> CREMA-D,speaker_supcon,Speaker-Aware SupCon,0.21875,0.16666666666666666,0.06140350877192982,0.0805921052631579
+ravdess_iemocap_to_cremad,RAVDESS + IEMOCAP -> CREMA-D,corpus_supcon,Corpus-Aware SupCon,0.21875,0.16666666666666666,0.06140350877192982,0.0805921052631579
+ravdess_iemocap_to_cremad,RAVDESS + IEMOCAP -> CREMA-D,proposed_supcon,Speaker + Corpus-Aware SupCon (Proposed),0.21875,0.16666666666666666,0.06140350877192982,0.0805921052631579

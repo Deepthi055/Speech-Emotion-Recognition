@@ -20,8 +20,17 @@ class EmbeddingDataset(Dataset):
                 self.speaker_ids = self.speaker_ids[:max_samples]
             if self.corpus is not None:
                 self.corpus = self.corpus[:max_samples]
-            if self.file_paths is not None:
-                self.file_paths = self.file_paths[:max_samples]
+        if self.speaker_ids is not None:
+            _, spk_indices = np.unique(self.speaker_ids, return_inverse=True)
+            self.speaker_encoded = spk_indices
+        else:
+            self.speaker_encoded = np.zeros(len(self.labels), dtype=int)
+
+        if self.corpus is not None:
+            _, corpus_indices = np.unique(self.corpus, return_inverse=True)
+            self.corpus_encoded = corpus_indices
+        else:
+            self.corpus_encoded = np.zeros(len(self.labels), dtype=int)
 
     def __len__(self):
         return len(self.embeddings)
@@ -29,7 +38,12 @@ class EmbeddingDataset(Dataset):
     def __getitem__(self, idx: int):
         emb = torch.from_numpy(self.embeddings[idx]).float()
         label = torch.tensor(self.labels[idx], dtype=torch.long)
+        spk_id = torch.tensor(self.speaker_encoded[idx], dtype=torch.long)
+        corpus_id = torch.tensor(self.corpus_encoded[idx], dtype=torch.long)
         return {
             "embedding": emb,
             "label": label,
+            "speaker_id": spk_id,
+            "corpus_id": corpus_id,
         }
+

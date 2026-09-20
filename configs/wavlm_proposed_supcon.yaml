@@ -1,6 +1,6 @@
 experiment:
-  name: "wavlm_supcon"
-  variant: "standard_supcon"
+  name: "wavlm_proposed_supcon"
+  variant: "proposed_supcon"
   device: "cpu"
 
 model:
@@ -24,4 +24,4 @@ training:
   supcon_weight: 1.0
   ce_weight: 1.0
   patience: 7
-  output_dir: "runs/wavlm_supcon"
+  output_dir: "runs/wavlm_proposed_supcon"

@@ -10,10 +10,9 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
 from src.datasets.emobox_dataset import SERDataset, collate_fn
-from src.models.emobox_model import WavLMSupConModel
+from src.models.ser_model import WavLMSupConModel
 from src.losses.supervised_contrastive import SupConLoss
 from src.samplers.standard import get_standard_sampler
-from src.samplers.speaker_corpus_aware import SpeakerCorpusAwareBatchSampler, compute_speaker_corpus_weights
 from src.training.evaluate import evaluate
 from src.utils.logging import setup_logger
 from src.utils.seed import set_seed
@@ -141,6 +140,7 @@ def main():
         use_projection=model_cfg.get("use_projection", True),
         use_classifier=model_cfg.get("use_classifier", True),
         pooling=model_cfg.get("pooling", "attention"),
+        freeze_backbone=model_cfg.get("freeze_backbone", False),
     ).to(device)
 
     ce_criterion = nn.CrossEntropyLoss()
@@ -225,3 +225,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+

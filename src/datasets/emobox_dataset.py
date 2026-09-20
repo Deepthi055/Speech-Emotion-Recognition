@@ -17,7 +17,6 @@ EMOTION_MAP = {
     "sad": 5,
 }
 
-
 class SERDataset(Dataset):
     def __init__(self, metadata_path_or_df, target_sr: int = 16000, max_seconds: float = 6.0, max_samples: int = None):
         super().__init__()
@@ -30,7 +29,7 @@ class SERDataset(Dataset):
             self.df = self.df.iloc[:max_samples].reset_index(drop=True)
 
         self.target_sr = target_sr
-        self.max_length = int(target_sr * max_seconds)
+        self.max_length = int(target_sr * max_seconds) if max_seconds is not None and max_seconds > 0 else None
 
         self.speakers = sorted(self.df["speaker_id"].unique())
         self.speaker_to_idx = {spk: i for i, spk in enumerate(self.speakers)}
@@ -45,6 +44,7 @@ class SERDataset(Dataset):
         path = path.replace("\\", "/")
         if not os.path.isabs(path) and not path.startswith("data/"):
             path = os.path.join("data", path)
+        path = str(path).replace("\\", "/")
 
         waveform, sr = sf.read(path, dtype="float32", always_2d=True)
         waveform = waveform.mean(axis=1)
@@ -53,14 +53,14 @@ class SERDataset(Dataset):
             g = gcd(sr, self.target_sr)
             waveform = resample_poly(waveform, self.target_sr // g, sr // g).astype(np.float32)
 
-        if len(waveform) > self.max_length:
+        if self.max_length is not None and len(waveform) > self.max_length:
             waveform = waveform[: self.max_length]
 
         return torch.from_numpy(waveform)
 
     def __getitem__(self, idx: int):
         row = self.df.iloc[idx]
-        audio_path = row["audio_path"] if "audio_path" in row else row["path"]
+        audio_path = row["file_path"] if "file_path" in row else row["audio_path"]
         waveform = self._load_audio(audio_path)
 
         emotion_str = row["emotion"]
@@ -80,8 +80,8 @@ class SERDataset(Dataset):
             "speaker_str": speaker_str,
             "corpus_str": corpus_str,
             "emotion_str": emotion_str,
+            "file_path": str(audio_path),
         }
-
 
 def collate_fn(batch):
     waveforms = [item["waveform"] for item in batch]
@@ -107,5 +107,6 @@ def collate_fn(batch):
         "corpus_ids": corpus_ids,
         "speaker_strs": [item["speaker_str"] for item in batch],
         "corpus_strs": [item["corpus_str"] for item in batch],
+        "file_paths": [item["file_path"] for item in batch],
     }
 

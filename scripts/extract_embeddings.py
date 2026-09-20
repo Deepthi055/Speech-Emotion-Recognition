@@ -15,6 +15,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 MODEL_ID = "microsoft/wavlm-base"
 TARGET_SR = 16000
+METADATA_FILES = {
+    "train": "unified_train.csv",
+    "val": "unified_val.csv",
+    "test": "unified_test.csv",
+}
 EMOTION_MAP = {
     "angry": 0,
     "disgust": 1,
@@ -54,7 +59,9 @@ def extract_embeddings_for_split(
 
     print(f"Extracting embeddings for {len(df)} samples...")
     for idx, row in tqdm(df.iterrows(), total=len(df), desc=f"Extracting {output_path.stem}"):
-        fpath = row["file_path"]
+        fpath = row.get("file_path", row.get("audio_path"))
+        if pd.isna(fpath):
+            raise ValueError("Metadata row has neither a valid 'file_path' nor 'audio_path'.")
         waveform = load_and_resample(fpath, TARGET_SR)  # (T,)
         input_values = waveform.unsqueeze(0).to(device)  # (1, T)
 
@@ -107,7 +114,10 @@ def main():
     output_dir = Path(args.output_dir)
 
     for split in ["train", "val", "test"]:
-        csv_file = metadata_dir / f"unified_{split}.csv"
+        csv_file = metadata_dir / METADATA_FILES[split]
+        if not csv_file.exists():
+            fallback_name = {"train": "train.csv", "val": "validation.csv", "test": "test.csv"}[split]
+            csv_file = metadata_dir / fallback_name
         if not csv_file.exists():
             print(f"Metadata file {csv_file} not found. Skipping.")
             continue

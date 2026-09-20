@@ -14,4 +14,4 @@ These plots illustrate the generalization performance of the proposed Speaker + 
 
 ![Cross-Corpus Macro-F1](/d:/DLproject/Speech-Emotion-Recognition/docs/results/images/cc_macro_f1.png)
 
-*Note: The Proposed SupCon significantly outperforms the baseline across all target corpora, particularly when IEMOCAP is the target domain.*
+*Note: The Proposed SupCon improves over the CE baseline for the IEMOCAP- and RAVDESS-target configurations, while the CE baseline is higher for the CREMA-D-target configuration. All SupCon variants have identical saved cross-corpus metrics in these experiments.*

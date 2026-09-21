@@ -9,10 +9,12 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
-from src.datasets.emobox_dataset import SERDataset, collate_fn
+from src.datasets.emobox_dataset import SERDataset, collate_fn, EMOTION_MAP
 from src.models.ser_model import WavLMSupConModel
 from src.losses.supervised_contrastive import SupConLoss
 from src.samplers.standard import get_standard_sampler
+from src.samplers.stratified import StratifiedEmotionBatchSampler
+SpeakerCorpusAwareBatchSampler = StratifiedEmotionBatchSampler
 from src.training.evaluate import evaluate
 from src.utils.logging import setup_logger
 from src.utils.seed import set_seed
@@ -54,8 +56,11 @@ def build_dataloader(dataset, config_sampler, is_train: bool = True):
     sampler_type = config_sampler.get("type", "standard") if is_train else "standard"
     batch_size = config_sampler.get("batch_size", 16)
 
-    if sampler_type == "speaker_corpus_aware" and is_train:
-        batch_sampler = SpeakerCorpusAwareBatchSampler(dataset, batch_size=batch_size)
+    if sampler_type in ["speaker_corpus_aware", "stratified"] and is_train:
+        labels = getattr(dataset, "labels", None)
+        if labels is None and hasattr(dataset, "df"):
+            labels = np.array([EMOTION_MAP[e] for e in dataset.df["emotion"]], dtype=np.int64)
+        batch_sampler = StratifiedEmotionBatchSampler(labels=labels, batch_size=batch_size)
         return DataLoader(dataset, batch_sampler=batch_sampler, collate_fn=collate_fn)
     else:
         batch_sampler = get_standard_sampler(dataset, batch_size=batch_size, shuffle=is_train)

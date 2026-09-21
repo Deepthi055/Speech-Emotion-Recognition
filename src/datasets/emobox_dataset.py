@@ -36,6 +36,7 @@ class SERDataset(Dataset):
 
         self.corpora = sorted(self.df["corpus"].unique()) if "corpus" in self.df.columns else ["default"]
         self.corpus_to_idx = {corp: i for i, corp in enumerate(self.corpora)}
+        self.labels = np.array([EMOTION_MAP[e] for e in self.df["emotion"]], dtype=np.int64)
 
     def __len__(self):
         return len(self.df)

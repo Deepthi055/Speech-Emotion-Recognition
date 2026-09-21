@@ -1,21 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { useAudioRecorder } from "@/hooks/useAudioRecorder";
+import { useState, useEffect } from "react";
 import { FileUploader } from "@/components/FileUploader";
 import { predictEmotion, getHealth, getResearchMetrics, PredictionResponse, ResearchMetricsResponse } from "@/lib/api";
 
-const EMOTION_COLORS: Record<string, string> = {
-  angry: "#ef4444",
-  disgust: "#10b981",
-  fear: "#a855f7",
-  happy: "#f59e0b",
-  neutral: "#6b7280",
-  sad: "#3b82f6",
-};
-
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<"demo" | "research">("demo");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -23,415 +12,564 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   const [health, setHealth] = useState<{ status: string; model_loaded: boolean } | null>(null);
-  const [researchData, setResearchData] = useState<ResearchMetricsResponse | null>(null);
-
-  const recorder = useAudioRecorder();
+  const [metricsData, setMetricsData] = useState<ResearchMetricsResponse | null>(null);
 
   useEffect(() => {
     getHealth().then(setHealth).catch(() => setHealth({ status: "offline", model_loaded: false }));
-    getResearchMetrics().then(setResearchData).catch(() => {});
+    getResearchMetrics().then(setMetricsData).catch(() => {});
   }, []);
 
-  const handleAudioBlob = (blob: Blob) => {
-    const file = new File([blob], "recorded_audio.wav", { type: blob.type || "audio/wav" });
-    const url = URL.createObjectURL(blob);
+  const handleUploadFile = (file: File, url: string) => {
+    if (audioUrl) URL.revokeObjectURL(audioUrl);
     setSelectedFile(file);
     setAudioUrl(url);
     setPrediction(null);
     setError(null);
   };
 
-  const handleUploadFile = (file: File, url: string) => {
-    setSelectedFile(file);
-    setAudioUrl(url);
+  const handleClear = () => {
+    if (audioUrl) URL.revokeObjectURL(audioUrl);
+    setSelectedFile(null);
+    setAudioUrl(null);
     setPrediction(null);
     setError(null);
   };
 
   const handlePredict = async () => {
-    let fileToUpload = selectedFile;
-    if (!fileToUpload && recorder.audioBlob) {
-      fileToUpload = new File([recorder.audioBlob], "recorded_audio.wav", { type: recorder.audioBlob.type || "audio/wav" });
-    }
-    if (!fileToUpload) return;
+    if (!selectedFile) return;
 
     setLoading(true);
     setError(null);
     try {
-      const res = await predictEmotion(fileToUpload);
+      const res = await predictEmotion(selectedFile);
       setPrediction(res);
     } catch (err: any) {
-      setError(err.message || "Failed to analyze audio");
+      setError(err.message || "Execution error during inference pass.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "2rem 1.5rem" }}>
-      {/* Header */}
-      <header style={{ marginBottom: "2.5rem", borderBottom: "1px solid var(--bg-border)", paddingBottom: "1.5rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div>
-            <h1 style={{ fontSize: "1.75rem", fontWeight: 700, margin: 0, letterSpacing: "-0.02em" }}>
-              Speech Emotion Recognition
-            </h1>
-            <p style={{ color: "var(--text-secondary)", marginTop: "0.4rem", fontSize: "0.95rem" }}>
-              Frozen WavLM + Speaker-Corpus Aware Supervised Contrastive Learning
-            </p>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.85rem" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg)" }}>
+      {/* Top Header Bar */}
+      <header
+        style={{
+          borderBottom: "1px solid var(--border)",
+          background: "var(--bg-subtle)",
+          padding: "0.75rem 1.5rem",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <span
+              className="font-mono"
               style={{
-                display: "inline-block",
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: health?.model_loaded ? "#10b981" : "#ef4444",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                letterSpacing: "0.08em",
+                color: "var(--text-primary)",
+                background: "var(--bg-element)",
+                padding: "2px 8px",
+                border: "1px solid var(--border)",
+                borderRadius: "2px",
               }}
-            />
-            <span style={{ color: "var(--text-secondary)" }}>
-              {health?.model_loaded ? "Model Ready" : health?.status === "offline" ? "Backend Offline" : "Loading Model..."}
+            >
+              SER / AUD-01
+            </span>
+            <div>
+              <h1
+                style={{
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  letterSpacing: "-0.01em",
+                  color: "var(--text-primary)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                Speech Emotion Intelligence System
+              </h1>
+            </div>
+          </div>
+
+          <div
+            className="font-mono"
+            style={{
+              fontSize: "0.75rem",
+              color: "var(--text-muted)",
+              display: "flex",
+              alignItems: "center",
+              gap: "1.25rem",
+            }}
+          >
+            <span>BACKBONE: <strong style={{ color: "var(--text-secondary)", fontWeight: 500 }}>WavLM-Base</strong></span>
+            <span>EMBED_DIM: <strong style={{ color: "var(--text-secondary)", fontWeight: 500 }}>768</strong></span>
+            <span>
+              STATUS:{" "}
+              <strong style={{ color: health?.model_loaded ? "#34d399" : "#f43f5e", fontWeight: 600 }}>
+                {health?.model_loaded ? "ONLINE" : "OFFLINE"}
+              </strong>
             </span>
           </div>
         </div>
-
-        {/* Tab Switcher */}
-        <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
-          <button
-            onClick={() => setActiveTab("demo")}
-            style={{
-              padding: "0.5rem 1rem",
-              borderRadius: "6px",
-              border: "1px solid",
-              borderColor: activeTab === "demo" ? "var(--accent)" : "var(--bg-border)",
-              background: activeTab === "demo" ? "var(--accent-dim)" : "transparent",
-              color: activeTab === "demo" ? "var(--accent)" : "var(--text-secondary)",
-              cursor: "pointer",
-              fontWeight: 500,
-            }}
-          >
-            Live Demo / Predict
-          </button>
-          <button
-            onClick={() => setActiveTab("research")}
-            style={{
-              padding: "0.5rem 1rem",
-              borderRadius: "6px",
-              border: "1px solid",
-              borderColor: activeTab === "research" ? "var(--accent)" : "var(--bg-border)",
-              background: activeTab === "research" ? "var(--accent-dim)" : "transparent",
-              color: activeTab === "research" ? "var(--accent)" : "var(--text-secondary)",
-              cursor: "pointer",
-              fontWeight: 500,
-            }}
-          >
-            Research & Benchmarks
-          </button>
-        </div>
       </header>
 
-      {/* Main Content */}
-      {activeTab === "demo" && (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-          {/* Input Panel */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-            {/* Record Section */}
-            <div
-              style={{
-                background: "var(--bg-surface)",
-                border: "1px solid var(--bg-border)",
-                borderRadius: "10px",
-                padding: "1.5rem",
-              }}
-            >
-              <h3 style={{ margin: "0 0 1rem 0", fontSize: "1.1rem", fontWeight: 600 }}>Record Audio</h3>
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                {recorder.state !== "recording" ? (
-                  <button
-                    onClick={recorder.startRecording}
-                    style={{
-                      padding: "0.6rem 1.2rem",
-                      borderRadius: "6px",
-                      background: "#ef4444",
-                      color: "#fff",
-                      border: "none",
-                      fontWeight: 600,
-                      cursor: "pointer",
-                    }}
-                  >
-                    🎤 Start Recording
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      recorder.stopRecording().then(handleAudioBlob);
-                    }}
-                    style={{
-                      padding: "0.6rem 1.2rem",
-                      borderRadius: "6px",
-                      background: "#3b82f6",
-                      color: "#fff",
-                      border: "none",
-                      fontWeight: 600,
-                      cursor: "pointer",
-                    }}
-                  >
-                    ⏹ Stop Recording ({recorder.duration}s)
-                  </button>
-                )}
-                {recorder.state === "recording" && (
-                  <span style={{ color: "#ef4444", fontSize: "0.85rem", animation: "pulse 1s infinite" }}>● Live</span>
-                )}
-              </div>
-            </div>
-
-            {/* Upload Section */}
-            <div
-              style={{
-                background: "var(--bg-surface)",
-                border: "1px solid var(--bg-border)",
-                borderRadius: "10px",
-                padding: "1.5rem",
-              }}
-            >
-              <h3 style={{ margin: "0 0 1rem 0", fontSize: "1.1rem", fontWeight: 600 }}>Upload Audio File</h3>
-              <FileUploader onFile={handleUploadFile} />
-            </div>
-
-            {/* Audio Preview & Predict Button */}
-            {(audioUrl || selectedFile) && (
-              <div
-                style={{
-                  background: "var(--bg-surface)",
-                  border: "1px solid var(--bg-border)",
-                  borderRadius: "10px",
-                  padding: "1.5rem",
-                }}
-              >
-                <h4 style={{ margin: "0 0 0.8rem 0", color: "var(--text-secondary)", fontSize: "0.9rem" }}>
-                  Selected Audio: {selectedFile?.name || "Recorded Audio"}
-                </h4>
-                {audioUrl && <audio controls src={audioUrl} style={{ width: "100%", marginBottom: "1rem" }} />}
-                <button
-                  onClick={handlePredict}
-                  disabled={loading || !health?.model_loaded}
-                  style={{
-                    width: "100%",
-                    padding: "0.75rem",
-                    borderRadius: "6px",
-                    background: loading ? "var(--bg-border)" : "var(--accent)",
-                    color: "#fff",
-                    border: "none",
-                    fontWeight: 600,
-                    fontSize: "1rem",
-                    cursor: loading ? "not-allowed" : "pointer",
-                  }}
-                >
-                  {loading ? "Extracting WavLM Features & Classifying..." : "Analyze Emotion"}
-                </button>
-              </div>
-            )}
-
-            {error && (
-              <div
-                style={{
-                  padding: "1rem",
-                  borderRadius: "6px",
-                  background: "rgba(239, 68, 68, 0.1)",
-                  border: "1px solid rgba(239, 68, 68, 0.3)",
-                  color: "#ef4444",
-                  fontSize: "0.9rem",
-                }}
-              >
-                {error}
-              </div>
-            )}
-          </div>
-
-          {/* Results Panel */}
+      {/* Main Workspace (Full Width, Compact Margins) */}
+      <main style={{ flex: 1, width: "100%", padding: "1.25rem 1.5rem" }}>
+        
+        {/* Dual Workspace Panels */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "1px",
+            background: "var(--border)",
+            border: "1px solid var(--border)",
+            borderRadius: "4px",
+            overflow: "hidden",
+          }}
+        >
+          {/* Left Panel: Input & Controls */}
           <div
             style={{
-              background: "var(--bg-surface)",
-              border: "1px solid var(--bg-border)",
-              borderRadius: "10px",
-              padding: "1.5rem",
+              background: "var(--bg-panel)",
+              padding: "1.25rem",
               display: "flex",
               flexDirection: "column",
+              justifyContent: "space-between",
+              minHeight: "420px",
             }}
           >
-            <h3 style={{ margin: "0 0 1.5rem 0", fontSize: "1.1rem", fontWeight: 600 }}>Prediction Result</h3>
-
-            {!prediction && !loading && (
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               <div
                 style={{
-                  flex: 1,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingBottom: "0.5rem",
+                  borderBottom: "1px solid var(--border-subtle)",
+                }}
+              >
+                <span
+                  className="font-mono"
+                  style={{
+                    fontSize: "0.7rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.08em",
+                    color: "var(--text-muted)",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  AUDIO INPUT PAYLOAD
+                </span>
+                {selectedFile && (
+                  <button
+                    onClick={handleClear}
+                    className="font-mono"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                      color: "var(--text-muted)",
+                      fontSize: "0.7rem",
+                      cursor: "pointer",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+                    onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                  >
+                    [ CLEAR FILE ]
+                  </button>
+                )}
+              </div>
+
+              {/* Upload Dropzone (Always visible to allow easy re-uploading) */}
+              <FileUploader onFile={handleUploadFile} />
+
+              {/* Active Audio Metadata & Waveform Player */}
+              {selectedFile && (
+                <div
+                  className="animate-fade"
+                  style={{
+                    background: "var(--bg-subtle)",
+                    border: "1px solid var(--border)",
+                    borderRadius: "3px",
+                    padding: "0.85rem 1rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.75rem",
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                    <span className="font-mono" style={{ fontSize: "0.8rem", color: "var(--text-primary)", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "340px" }}>
+                      {selectedFile.name}
+                    </span>
+                    <span className="font-mono" style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>
+                      {(selectedFile.size / 1024).toFixed(1)} KB
+                    </span>
+                  </div>
+
+                  <div className="font-mono" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", fontSize: "0.7rem", color: "var(--text-muted)", paddingTop: "0.35rem", borderTop: "1px solid var(--border-subtle)" }}>
+                    <span>TARGET_SR: 16000 Hz</span>
+                    <span>CHANNELS: 1 (MONO)</span>
+                  </div>
+
+                  {audioUrl && (
+                    <audio
+                      controls
+                      src={audioUrl}
+                      style={{
+                        width: "100%",
+                        height: "36px",
+                        borderRadius: "2px",
+                      }}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+
+            <div style={{ marginTop: "1.25rem" }}>
+              {error && (
+                <div
+                  className="font-mono"
+                  style={{
+                    padding: "0.6rem 0.8rem",
+                    borderRadius: "2px",
+                    background: "rgba(244, 63, 94, 0.08)",
+                    border: "1px solid rgba(244, 63, 94, 0.25)",
+                    color: "var(--error)",
+                    fontSize: "0.75rem",
+                    marginBottom: "0.75rem",
+                  }}
+                >
+                  ERR: {error}
+                </div>
+              )}
+
+              <button
+                onClick={handlePredict}
+                disabled={loading || !selectedFile || !health?.model_loaded}
+                className="font-mono"
+                style={{
+                  width: "100%",
+                  padding: "0.75rem",
+                  borderRadius: "2px",
+                  background: loading ? "var(--bg-element)" : !selectedFile ? "var(--bg-subtle)" : "var(--text-primary)",
+                  color: loading || !selectedFile ? "var(--text-muted)" : "var(--bg)",
+                  border: "1px solid var(--border)",
+                  fontWeight: 600,
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                  cursor: loading || !selectedFile || !health?.model_loaded ? "not-allowed" : "pointer",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "var(--text-muted)",
-                  textAlign: "center",
-                  fontSize: "0.95rem",
+                  gap: "0.5rem",
+                  transition: "all 0.12s ease",
                 }}
               >
-                Record or upload an audio file and click "Analyze Emotion" to view model predictions.
-              </div>
-            )}
+                {loading && (
+                  <span
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      border: "2px solid var(--text-muted)",
+                      borderTopColor: "var(--text-primary)",
+                      borderRadius: "50%",
+                      animation: "spin 0.6s linear infinite",
+                    }}
+                  />
+                )}
+                {loading ? "COMPUTING EMBEDDINGS & INFERENCE..." : "EXECUTE MODEL INFERENCE"}
+              </button>
+            </div>
+          </div>
 
-            {loading && (
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "1rem" }}>
-                <div
+          {/* Right Panel: Output & Probabilities */}
+          <div
+            style={{
+              background: "var(--bg-panel)",
+              padding: "1.25rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              minHeight: "420px",
+            }}
+          >
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "1rem",
+                  paddingBottom: "0.5rem",
+                  borderBottom: "1px solid var(--border-subtle)",
+                }}
+              >
+                <span
+                  className="font-mono"
                   style={{
-                    width: "32px",
-                    height: "32px",
-                    border: "3px solid var(--bg-border)",
-                    borderTopColor: "var(--accent)",
-                    borderRadius: "50%",
-                    animation: "spin 1s linear infinite",
-                  }}
-                />
-                <span style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>Passing audio through frozen WavLM encoder...</span>
-              </div>
-            )}
-
-            {prediction && (
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                {/* Predicted Emotion Badge */}
-                <div
-                  style={{
-                    padding: "1.5rem",
-                    borderRadius: "8px",
-                    background: "rgba(255, 255, 255, 0.03)",
-                    border: `1px solid ${EMOTION_COLORS[prediction.predicted_emotion] || "var(--accent)"}`,
-                    textAlign: "center",
+                    fontSize: "0.7rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.08em",
+                    color: "var(--text-muted)",
+                    textTransform: "uppercase",
                   }}
                 >
-                  <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                    Detected Emotion
+                  CLASSIFICATION OUTPUT
+                </span>
+                {prediction && (
+                  <span className="font-mono" style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>
+                    LATENCY: {prediction.processing_time_seconds.toFixed(3)}s
                   </span>
+                )}
+              </div>
+
+              {!prediction && !loading && (
+                <div
+                  style={{
+                    height: "300px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "var(--text-muted)",
+                    fontSize: "0.8rem",
+                  }}
+                  className="font-mono"
+                >
+                  [ AWAITING INPUT INFERENCE PASS ]
+                </div>
+              )}
+
+              {loading && (
+                <div style={{ height: "300px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0.75rem" }}>
                   <div
                     style={{
-                      fontSize: "2.2rem",
-                      fontWeight: 700,
-                      color: EMOTION_COLORS[prediction.predicted_emotion] || "#fff",
-                      textTransform: "capitalize",
-                      margin: "0.2rem 0",
+                      width: "24px",
+                      height: "24px",
+                      border: "2px solid var(--border)",
+                      borderTopColor: "var(--accent)",
+                      borderRadius: "50%",
+                      animation: "spin 0.6s linear infinite",
+                    }}
+                  />
+                  <span className="font-mono" style={{ color: "var(--text-muted)", fontSize: "0.75rem" }}>
+                    EXTRACTING WAVEFORM FEATURES (WAVLM)...
+                  </span>
+                </div>
+              )}
+
+              {prediction && (
+                <div className="animate-fade" style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                  {/* Primary Emotion Result Banner */}
+                  <div
+                    style={{
+                      background: "var(--bg-subtle)",
+                      border: "1px solid var(--border)",
+                      borderRadius: "3px",
+                      padding: "1rem 1.25rem",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    {prediction.predicted_emotion}
-                  </div>
-                  <div style={{ fontSize: "0.9rem", color: "var(--text-secondary)" }}>
-                    Confidence: {(prediction.confidence * 100).toFixed(1)}% | Latency: {prediction.processing_time_seconds.toFixed(2)}s
-                  </div>
-                </div>
+                    <div>
+                      <div className="font-mono" style={{ fontSize: "0.65rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                        PREDICTED CLASS
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "1.75rem",
+                          fontWeight: 600,
+                          color: "var(--text-primary)",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.02em",
+                          marginTop: "2px",
+                        }}
+                      >
+                        {prediction.predicted_emotion}
+                      </div>
+                    </div>
 
-                {/* Probability Distribution */}
-                <div>
-                  <h4 style={{ margin: "0 0 1rem 0", fontSize: "0.95rem", color: "var(--text-secondary)" }}>Emotion Probabilities</h4>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                    {Object.entries(prediction.probabilities)
-                      .sort(([, a], [, b]) => b - a)
-                      .map(([emo, prob]) => (
-                        <div key={emo} style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-                          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem" }}>
-                            <span style={{ textTransform: "capitalize", fontWeight: emo === prediction.predicted_emotion ? 600 : 400 }}>{emo}</span>
-                            <span style={{ color: "var(--text-secondary)" }}>{(prob * 100).toFixed(1)}%</span>
-                          </div>
-                          <div
-                            style={{
-                              width: "100%",
-                              height: "6px",
-                              borderRadius: "3px",
-                              background: "var(--bg-border)",
-                              overflow: "hidden",
-                            }}
-                          >
-                            <div
-                              style={{
-                                width: `${prob * 100}%`,
-                                height: "100%",
-                                background: EMOTION_COLORS[emo] || "var(--accent)",
-                                transition: "width 0.3s ease",
-                              }}
-                            />
-                          </div>
-                        </div>
-                      ))}
+                    <div className="font-mono" style={{ textAlign: "right" }}>
+                      <div style={{ fontSize: "0.65rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                        CONFIDENCE
+                      </div>
+                      <div style={{ fontSize: "1.5rem", fontWeight: 600, color: "var(--accent)", marginTop: "2px" }}>
+                        {(prediction.confidence * 100).toFixed(2)}%
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Probability Distribution Table */}
+                  <div>
+                    <div className="font-mono" style={{ fontSize: "0.7rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.6rem" }}>
+                      CLASS PROBABILITY DISTRIBUTION
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
+                      {Object.entries(prediction.probabilities)
+                        .sort(([, a], [, b]) => b - a)
+                        .map(([emo, prob]) => {
+                          const isTop = emo === prediction.predicted_emotion;
+                          return (
+                            <div key={emo} style={{ display: "grid", gridTemplateColumns: "80px 1fr 60px", alignItems: "center", gap: "0.75rem" }}>
+                              <span
+                                className="font-mono"
+                                style={{
+                                  fontSize: "0.75rem",
+                                  textTransform: "uppercase",
+                                  color: isTop ? "var(--text-primary)" : "var(--text-muted)",
+                                  fontWeight: isTop ? 600 : 400,
+                                }}
+                              >
+                                {emo}
+                              </span>
+                              <div
+                                style={{
+                                  height: "4px",
+                                  background: "var(--bg-subtle)",
+                                  border: "1px solid var(--border-subtle)",
+                                  borderRadius: "1px",
+                                  overflow: "hidden",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    width: `${prob * 100}%`,
+                                    height: "100%",
+                                    background: isTop ? "var(--accent)" : "var(--text-muted)",
+                                    transition: "width 0.25s ease",
+                                  }}
+                                />
+                              </div>
+                              <span
+                                className="font-mono"
+                                style={{
+                                  fontSize: "0.75rem",
+                                  textAlign: "right",
+                                  color: isTop ? "var(--text-primary)" : "var(--text-muted)",
+                                  fontWeight: isTop ? 600 : 400,
+                                }}
+                              >
+                                {(prob * 100).toFixed(1)}%
+                              </span>
+                            </div>
+                          );
+                        })}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      )}
 
-      {/* Research & Benchmarks Tab */}
-      {activeTab === "research" && (
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          <div style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)", borderRadius: "10px", padding: "1.5rem" }}>
-            <h3 style={{ margin: "0 0 0.5rem 0", fontSize: "1.2rem", fontWeight: 600 }}>Proposed Architecture</h3>
-            <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem", lineHeight: 1.6 }}>
-              Our method uses a frozen <strong>WavLM-base</strong> audio backbone to extract frame-level speech features, which are mean-pooled into 768-dim embeddings. We train a linear classifier using <strong>Speaker + Corpus-aware Supervised Contrastive Learning (SupCon)</strong> to learn representations robust against speaker variation and cross-corpus domain shifts.
-            </p>
-          </div>
+        {/* Integrated Performance Section */}
+        {metricsData && (
+          <section
+            style={{
+              marginTop: "1.25rem",
+              background: "var(--bg-panel)",
+              border: "1px solid var(--border)",
+              borderRadius: "4px",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                padding: "0.75rem 1.25rem",
+                borderBottom: "1px solid var(--border)",
+                background: "var(--bg-subtle)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <span
+                className="font-mono"
+                style={{
+                  fontSize: "0.7rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  color: "var(--text-muted)",
+                  textTransform: "uppercase",
+                }}
+              >
+                MODEL PERFORMANCE EVALUATION & GENERALIZATION MATRIX
+              </span>
+              <span className="font-mono" style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>
+                TEST SAMPLES: 3,234 | CORPORA: CREMA-D, RAVDESS, IEMOCAP
+              </span>
+            </div>
 
-          {researchData ? (
-            <>
-              {/* In-domain Model Comparison */}
-              <div style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)", borderRadius: "10px", padding: "1.5rem" }}>
-                <h3 style={{ margin: "0 0 1rem 0", fontSize: "1.1rem", fontWeight: 600 }}>In-Domain Benchmarks (CREMA-D, RAVDESS, IEMOCAP)</h3>
-                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem", textAlign: "left" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "var(--border)" }}>
+              {/* In-domain Benchmarks */}
+              <div style={{ background: "var(--bg-panel)", padding: "1.25rem" }}>
+                <div className="font-mono" style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-primary)", marginBottom: "0.75rem", letterSpacing: "0.04em" }}>
+                  IN-DOMAIN BENCHMARKS
+                </div>
+                <table className="tech-table">
                   <thead>
-                    <tr style={{ borderBottom: "1px solid var(--bg-border)", color: "var(--text-secondary)" }}>
-                      <th style={{ padding: "0.75rem" }}>Model Architecture</th>
-                      <th style={{ padding: "0.75rem" }}>Accuracy</th>
-                      <th style={{ padding: "0.75rem" }}>Macro F1</th>
-                      <th style={{ padding: "0.75rem" }}>Weighted F1</th>
+                    <tr>
+                      <th>MODEL VARIANT</th>
+                      <th>ACCURACY</th>
+                      <th>MACRO F1</th>
+                      <th>WEIGHTED F1</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {researchData.models.map((m, idx) => (
-                      <tr
-                        key={m.name}
-                        style={{
-                          borderBottom: "1px solid var(--bg-border)",
-                          background: m.name.includes("Proposed") ? "var(--accent-dim)" : "transparent",
-                          fontWeight: m.name.includes("Proposed") ? 600 : 400,
-                        }}
-                      >
-                        <td style={{ padding: "0.75rem" }}>{m.name}</td>
-                        <td style={{ padding: "0.75rem" }}>{(m.metrics.accuracy * 100).toFixed(2)}%</td>
-                        <td style={{ padding: "0.75rem" }}>{(m.metrics.macro_f1 * 100).toFixed(2)}%</td>
-                        <td style={{ padding: "0.75rem" }}>{(m.metrics.weighted_f1 * 100).toFixed(2)}%</td>
-                      </tr>
-                    ))}
+                    {metricsData.models.map((m) => {
+                      const isMain = m.name.includes("Proposed") || m.name.includes("Corpus-Aware");
+                      return (
+                        <tr key={m.name} className={isMain ? "highlight" : ""}>
+                          <td style={{ fontWeight: isMain ? 500 : 400 }}>{m.name}</td>
+                          <td className="font-mono">{(m.metrics.accuracy * 100).toFixed(2)}%</td>
+                          <td className="font-mono">{(m.metrics.macro_f1 * 100).toFixed(2)}%</td>
+                          <td className="font-mono">{(m.metrics.weighted_f1 * 100).toFixed(2)}%</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
 
               {/* Cross-Corpus Results */}
-              <div style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)", borderRadius: "10px", padding: "1.5rem" }}>
-                <h3 style={{ margin: "0 0 1rem 0", fontSize: "1.1rem", fontWeight: 600 }}>Cross-Corpus Generalization (Zero-Shot Unseen Corpus)</h3>
-                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.9rem", textAlign: "left" }}>
+              <div style={{ background: "var(--bg-panel)", padding: "1.25rem" }}>
+                <div className="font-mono" style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-primary)", marginBottom: "0.75rem", letterSpacing: "0.04em" }}>
+                  CROSS-CORPUS DOMAIN SHIFT
+                </div>
+                <table className="tech-table">
                   <thead>
-                    <tr style={{ borderBottom: "1px solid var(--bg-border)", color: "var(--text-secondary)" }}>
-                      <th style={{ padding: "0.75rem" }}>Train Setup → Test Target</th>
-                      <th style={{ padding: "0.75rem" }}>WavLM Baseline F1</th>
-                      <th style={{ padding: "0.75rem" }}>Proposed SupCon F1</th>
-                      <th style={{ padding: "0.75rem" }}>Improvement</th>
+                    <tr>
+                      <th>DOMAIN TRANSFER</th>
+                      <th>BASELINE F1</th>
+                      <th>MODEL F1</th>
+                      <th>DELTA</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {Object.entries(researchData.cross_corpus).map(([split, data]) => {
+                    {Object.entries(metricsData.cross_corpus).map(([split, data]) => {
                       const ceF1 = data["WavLM + CE"]?.macro_f1 || 0;
                       const propF1 = data["Speaker + Corpus-aware SupCon (Proposed)"]?.macro_f1 || 0;
                       const diff = (propF1 - ceF1) * 100;
                       return (
-                        <tr key={split} style={{ borderBottom: "1px solid var(--bg-border)" }}>
-                          <td style={{ padding: "0.75rem" }}>{split.replace("_to_", " → ").toUpperCase()}</td>
-                          <td style={{ padding: "0.75rem" }}>{(ceF1 * 100).toFixed(2)}%</td>
-                          <td style={{ padding: "0.75rem", fontWeight: 600, color: "var(--accent)" }}>{(propF1 * 100).toFixed(2)}%</td>
-                          <td style={{ padding: "0.75rem", color: diff >= 0 ? "#10b981" : "#ef4444" }}>
+                        <tr key={split}>
+                          <td className="font-mono">{split.replace("_to_", " -> ").toUpperCase()}</td>
+                          <td className="font-mono">{(ceF1 * 100).toFixed(2)}%</td>
+                          <td className="font-mono" style={{ color: "var(--text-primary)", fontWeight: 500 }}>{(propF1 * 100).toFixed(2)}%</td>
+                          <td className="font-mono" style={{ color: diff >= 0 ? "#34d399" : "#f43f5e" }}>
                             {diff >= 0 ? `+${diff.toFixed(2)}%` : `${diff.toFixed(2)}%`}
                           </td>
                         </tr>
@@ -440,12 +578,10 @@ export default function Home() {
                   </tbody>
                 </table>
               </div>
-            </>
-          ) : (
-            <div style={{ color: "var(--text-muted)" }}>Loading research benchmarks...</div>
-          )}
-        </div>
-      )}
+            </div>
+          </section>
+        )}
+      </main>
     </div>
   );
 }
